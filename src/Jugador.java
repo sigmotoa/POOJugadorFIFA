@@ -32,9 +32,14 @@ public class Jugador extends Persona {
     public Jugador(String nombre, LocalDate nacimiento)
     {
         super.name=nombre;
-        nacimiento=this.nacimiento;
+        this.nacimiento=nacimiento;
     }
 
     public Jugador()
     {}
+
+    public String playerToCSV()
+    {
+        return this.name + ","+this.dorsal+","+this.getEdad()+","+is_alive;
+    }
 }
