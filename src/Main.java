@@ -81,9 +81,16 @@ public class Main {
         try {
             FileReader lector = new FileReader("players.csv");
             BufferedReader buffer = new BufferedReader(lector);
-            String playerReader = buffer.readLine();
-            System.out.println(playerReader);
+            String playerReader;
+
+            while ((playerReader= buffer.readLine())!=null)
+            {
+                System.out.println(playerReader);
+            }
+
+
             buffer.close();
+            System.out.println("All players have been read");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
