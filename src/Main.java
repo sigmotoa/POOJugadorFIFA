@@ -1,7 +1,22 @@
 import java.time.LocalDate;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
+
+        Jugador newPlayer = new Jugador("Pele", LocalDate.of(1940, 10,23));
+        newPlayer.is_alive = false;
+        newPlayer.dorsal=10;
+        System.out.println(newPlayer);
+        System.out.println("Edad: "+newPlayer.getEdad());
+        System.out.println(newPlayer.playerToCSV());
+        savePlayer(newPlayer);
+        /*
+
+
+
+
         Jugador j1 = new Jugador();
 
         Equipo e1 = new Equipo();
@@ -41,6 +56,20 @@ public class Main {
         System.out.println(t1);
 
         System.out.println(j3.getEdad());
+*/
+    }
 
+    public static void savePlayer(Jugador jugadorToSave)
+    {
+        try{
+            FileWriter escribir = new FileWriter("players.csv");
+            escribir.write(jugadorToSave.playerToCSV());
+            escribir.close();
+            System.out.println("Player Saved");
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 }
