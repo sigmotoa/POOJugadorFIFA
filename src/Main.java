@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Main {
@@ -8,10 +10,12 @@ public class Main {
         Jugador newPlayer = new Jugador("Pele", LocalDate.of(1940, 10,23));
         newPlayer.is_alive = false;
         newPlayer.dorsal=10;
-        System.out.println(newPlayer);
-        System.out.println("Edad: "+newPlayer.getEdad());
-        System.out.println(newPlayer.playerToCSV());
-        savePlayer(newPlayer);
+        //System.out.println(newPlayer);
+        //System.out.println("Edad: "+newPlayer.getEdad());
+        //System.out.println(newPlayer.playerToCSV());
+        //savePlayer(newPlayer);
+        System.out.println("*************************");
+        readPlayer();
         /*
 
 
@@ -69,6 +73,18 @@ public class Main {
         }
         catch (IOException e)
         {
+            System.out.println(e.getMessage());
+        }
+    }
+    public static void readPlayer()
+    {
+        try {
+            FileReader lector = new FileReader("players.csv");
+            BufferedReader buffer = new BufferedReader(lector);
+            String playerReader = buffer.readLine();
+            System.out.println(playerReader);
+            buffer.close();
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
