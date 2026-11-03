@@ -23,6 +23,13 @@ public class Persona {
                 '}';
     }
 
+    public String getId(){
+        return id;
+    }
+    public void setId(String Id){
+        this.id=Id;
+    }
+
 
 
 

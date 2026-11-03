@@ -6,11 +6,30 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Locale;
+import java.util.*;
 
 public class Operation {
+    public static String generarId() {
+        Set<String> usados = new HashSet<>();
+        try (BufferedReader buffer = new BufferedReader(new FileReader("players.csv"))) {
+            String line;
+            while ((line = buffer.readLine()) != null) {
+                usados.add(line.split(",")[0]);
+            }
+        }
+        catch (IOException e) {
+        }
+        Random ramdom = new Random();
+        String nuevo;
+        do{
+            nuevo = String.valueOf(100000 + ramdom.nextInt(900000));
+        }
+        while (usados.contains(nuevo));
+            return nuevo;
+    }
     public static void savePlayer(Jugador jugadorToSave)
     {
+        jugadorToSave.setId(generarId());
     try{
         FileWriter escribir = new FileWriter("players.csv", true);
 
@@ -35,7 +54,8 @@ public class Operation {
 
             while ((playerReader= buffer.readLine())!=null)
             {
-                System.out.println(playerReader);
+                String[] d = playerReader.split(",");
+                System.out.println("ID: " + d[0] + " | Nombre: " + d[1] + " | Dorsal: " + d[2] + " | Edad: " + d[3] + " | Vivo: " + d[4]);
             }
 
 
@@ -57,9 +77,10 @@ public class Operation {
 
                String [] data_readed = playerReader.split(",");
                Jugador temp_player = new Jugador();
-               temp_player.name= data_readed[0];
-               temp_player.dorsal = Integer.parseInt(data_readed[1]);
-               temp_player.is_alive = Boolean.parseBoolean(data_readed[3]);
+               temp_player.setId(data_readed[0]);
+               temp_player.name= data_readed[1];
+               temp_player.dorsal = Integer.parseInt(data_readed[2]);
+               temp_player.is_alive = Boolean.parseBoolean(data_readed[4]);
 
                if (temp_player.name.equals(name))
                {
@@ -76,6 +97,7 @@ public class Operation {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
 
         //TODO adicionar ID para los registros de jugadores
 
