@@ -29,7 +29,7 @@ public class Main {
             System.out.println("1. Crear Jugador");
             System.out.println("2. Buscar Jugador");
             System.out.println("3. Mostrar jugadores");
-            //TODO actualizar y borrar
+            System.out.println("4. Actualizar jugador");
             System.out.println("0. Salir destamonda");
             System.out.println("*********** CRUD FIFAS *********** ");
 

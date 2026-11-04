@@ -7,7 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Operation {
     public static String generarId() {
@@ -99,26 +100,63 @@ public class Operation {
             System.out.println(e.getMessage());
         }
 
-
-        //TODO adicionar ID para los registros de jugadores
-
-
     }
 
+    public static void UpdatePlayer(Jugador jugadorToUpdate){
+        StringBuilder contenido = new StringBuilder();
+        boolean encontrado = false;
 
+        try{
+            FileReader lector = new FileReader("players.csv");
+            BufferedReader buffer = new BufferedReader(lector);
+            String playerReader;
 
+            while ((playerReader = buffer.readLine()) !=null){
+                if(playerReader.isBlank()) continue;
+                String[] data_readed = playerReader.split(",");
+                if(data_readed.length<5)continue;
 
+                if(!encontrado && data_readed[1].equalsIgnoreCase(jugadorToUpdate.name)){
+                    data_readed[2] = String.valueOf(jugadorToUpdate.dorsal);
+                    data_readed[4] = String.valueOf(jugadorToUpdate.is_alive);
+                    playerReader = String.join(",", data_readed);
+                    encontrado = true;
 
+                }
+                contenido.append(playerReader).append("\n");
+            }
+            buffer.close();
 
-
-
-
-
-
-
-
-
-
-
-
+            if(encontrado){
+                FileWriter writer = new FileWriter("players.csv", false);
+                writer.write(contenido.toString());
+                writer.close();
+                System.out.println("Player Updated");
+            }
+            else {
+                System.out.println("Player Not Updated");
+            }
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
