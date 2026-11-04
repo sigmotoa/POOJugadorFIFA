@@ -31,10 +31,11 @@ public class Jugador extends Persona {
     }
 
 
-    public Jugador(String nombre, LocalDate nacimiento)
+    public Jugador(String nombre, LocalDate nacimiento, int dorsal)
     {
         super.name=nombre;
         this.nacimiento=nacimiento;
+        this.dorsal=dorsal;
     }
 
     public Jugador()
@@ -42,6 +43,6 @@ public class Jugador extends Persona {
 
     public String playerToCSV()
     {
-        return this.name + ","+this.dorsal+","+this.getEdad()+","+is_alive;
+        return this.getId()+","+this.name + ","+this.dorsal+","+this.getEdad()+","+is_alive;
     }
 }

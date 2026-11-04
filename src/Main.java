@@ -1,3 +1,4 @@
+import jdk.swing.interop.SwingInterOpUtils;
 import models.Jugador;
 
 import java.time.LocalDate;
@@ -67,7 +68,9 @@ public class Main {
         int month = leer.nextInt();
         System.out.println("Ingrese día de nacimiento");
         int day = leer.nextInt();
-        savePlayer(new Jugador(name_player, LocalDate.of(year, month, day)));
+        System.out.println("Ingrese el dorsal");
+        int dorsal = leer.nextInt();
+        savePlayer(new Jugador(name_player, LocalDate.of(year, month, day),dorsal));
     }
 
     public static void findPlayer() {
