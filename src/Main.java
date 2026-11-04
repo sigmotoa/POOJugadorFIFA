@@ -1,9 +1,12 @@
+import db.Database;
 import models.Jugador;
+import operations.OperationsDB;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
 import static operations.Operation.*;
+import static operations.OperationsDB.readPlayersDB;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +15,7 @@ public class Main {
         //newPlayer.is_alive = false;
         //newPlayer.dorsal=10;
         //TODO crear menu para usar y operar las acciones de los jugadores
-
+        Database.createTable();
         Scanner leer = new Scanner(System.in);
 
 
@@ -67,7 +70,12 @@ public class Main {
         int month = leer.nextInt();
         System.out.println("Ingrese día de nacimiento");
         int day = leer.nextInt();
-        savePlayer(new Jugador(name_player, LocalDate.of(year, month, day)));
+        //savePlayer(new Jugador(name_player, LocalDate.of(year, month, day)));
+        Jugador j2db = new Jugador(name_player,LocalDate.of(year,month,day));
+        System.out.println("Ingrese el dorsal");
+        j2db.dorsal = leer.nextInt();
+        j2db.is_alive = true;
+        OperationsDB.saveJugadorDB(j2db);
     }
 
     public static void findPlayer() {
@@ -78,8 +86,8 @@ public class Main {
     }
 
     public static void showAllPlayers() {
-        readPlayers();
-
+        //readPlayers();
+        readPlayersDB();
     }
 
 
